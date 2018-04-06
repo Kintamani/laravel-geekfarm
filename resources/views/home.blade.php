@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    @include ('articles.show')
                 </div>
             </div>
         </div>

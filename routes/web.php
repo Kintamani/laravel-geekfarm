@@ -14,10 +14,8 @@
 Route::get('/', function () {
      return view('welcome');
 });
-
-Route::resource('admin', 'AdminController\AdminController');
-Route::resource('user', 'UserController\UserController');
-
 Auth::routes();
-
+Route::resource('admin', 'Admin\AdminController');
+Route::resource('user', 'User\UserController');
 Route::get('/home', 'HomeController@index');
+Route::resource('articles', 'Article\ArticlesController');
