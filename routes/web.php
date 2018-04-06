@@ -19,3 +19,4 @@ Route::resource('admin', 'Admin\AdminController');
 Route::resource('user', 'User\UserController');
 Route::get('/home', 'HomeController@index');
 Route::resource('articles', 'Article\ArticlesController');
+Route::resource('comments', 'Comment\CommentsController');

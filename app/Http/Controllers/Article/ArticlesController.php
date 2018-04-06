@@ -30,8 +30,13 @@ class ArticlesController extends Controller
     }
 
     public function show($id){
+        //$article = Article::find($id);
+        //$comments = Article::find($id)->comments;
+        //return view('articles.show')->with('articles', $article);
+        
         $article = Article::find($id);
-        return view('articles.show')->with('articles', $article);
+        $comments = Article::find($id)->comments->sortBy('Comment.created_at');
+        return view('articles.show')->with('article', $article)->with('comments', $comments);
     }
 
     public function edit($id){
