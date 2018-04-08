@@ -1,15 +1,12 @@
 @extends('layouts/app')
 @section("content") 
-  <div class="row"> 
-    <h2 class="pull-left">List Articles</h2> 
+<div class="row">
+  <div class="panel panel-default"> 
+    <h2 class="panel-heading">List Articles</h2> 
     {{--  {!! link_to(route("articles/create"), "Create", ["class"=>"pull-right btn btn-raised btn-primary"]) !!}   --}}
+    {{--  <a  class="btn btn-light float-right" href="{{url('contact')}}">Delete</a>  --}}
+    <button type="button" onclick="window.location.href='{{url('articles/create')}}'" style="margin:0 93%;">Create </button>
   </div>
-  <div class="row">
-    <p>
-        {{--  <a  class="btn btn-light float-right" href="{{url('contact')}}">Delete</a>  --}}
-        <a  class="btn btn-light float-right" href="{{url('articles/create')}}" style="margin-left:5px;">Create</a>
-    </p>
-    <hr>
-  </div>
+</div>
 @include('articles/list') 
 @stop

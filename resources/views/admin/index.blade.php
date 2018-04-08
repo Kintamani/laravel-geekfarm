@@ -11,8 +11,9 @@
 
                 <div class="panel-body">
                  {{--  @include ('admin/create');   --}}
-                  your login
-                  
+                 
+                {!! link_to(route('articles.create'), "Create", ['class' => 'btn btn-raised btn-info']) !!}
+                {!! link_to(route('articles.index'), "Article", ['class' => 'btn btn-raised btn-info']) !!}
                 </div>
             </div>
         </div>

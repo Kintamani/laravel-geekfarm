@@ -1,9 +1,18 @@
 @foreach($articles as $article)
-<article class="row"> 
-  
-  <h1 class="col-6 col-md-4">{!!$article->title!!}</h1>
-  <p class="col-12 col-md-8"> {!! str_limit($article->content, 250) !!} 
-     <a href="{{route('articles.show', $article->id)}}">Read More</a>
-  </p>
-</article> 
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default">
+         <div class="panel-heading">
+            {!!$article->title!!}
+          </div>
+    
+    <div class="panel-body">
+        <p> 
+          {!! str_limit($article->content, 250) !!} 
+          <a href="{{route('articles.show', $article->id)}}">Read More</a>
+        </p>
+    {{--  </div>  --}}
+  </div>  
+</div>
+
 @endforeach
