@@ -96,7 +96,7 @@
     <script src="{{asset('js/bootstrap.js')}}"  type="text/javascript"></script>
      
     <!-- Scripts -->
-    <script src="js/app.js'"  type="text/javascript"></script>
+    <script src="js/app.js"  type="text/javascript"></script>
     <! -- Ajax -->
     
     <!-- Search -->
@@ -112,7 +112,7 @@
         },
         success : function(data) {
         //menampilkan fungsi ajax
-        $('#data-content').html(data['view']);
+            $('#data-content').html(data['view']);
         
         },
         error : function(xhr, status) {
@@ -142,11 +142,10 @@
                 data : {
                 'keywords' : $('#keywords').val(),
                 'direction' : $('#direction').val()
-            }
+            },
             success : function(data) {
                 $('#data-content').html(data['view']);
-                $('#keywords').val(data['keywords']);
-                $('#direction').val(data['direction']);
+                
             },
             error : function(xhr, status, error) {
                 console.log(xhr.error + "\n ERROR STATUS : " + status + "\n"+ error);
