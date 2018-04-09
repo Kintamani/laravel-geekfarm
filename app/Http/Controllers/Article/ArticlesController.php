@@ -14,9 +14,17 @@ class ArticlesController extends Controller
         $this->middleware('auth');
     }
     
-    public function index(){
-        $article = Article::all();
-        return view('articles.index')->with('articles', $article);
+    public function index(Request $request){
+        
+        if (empty($request->keyword)) {
+            $articles = Article::all();
+            return view('articles.index')->with('articles', $articles);
+        }
+        else{
+            // dd($request);
+        $articles = Article::where('title', 'like', '%'.$request->keyword.'%') ->orWhere('content', 'like', '%'.$request->keyword.'%')->get();
+        return view('articles.index')->with('articles', $articles);
+        }
     }
    
     public function create(){
@@ -41,7 +49,7 @@ class ArticlesController extends Controller
 
     public function edit($id){
         $article = Article::find($id);
-        return view('articles.edit')->with('articles', $article);
+        return view('articles.edit')->with('article', $article);
     }
 
     public function update(Request $request, $id){
@@ -51,8 +59,11 @@ class ArticlesController extends Controller
     }
 
     public function destroy($id){
+        dd(id);
         Article::destroy($id);
         Session::flash("notice", "Article success deleted");
         return redirect()->route("articles.index");
     }
+    
+  
 }
