@@ -6,9 +6,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>{!! $article->title !!}</h1>
+                {!! Form::open(['route' => ['articles.destroy', $article->id], 'method' => 'delete']) !!}
                 {!! link_to(route('articles.index'), "Back", ['class' => 'btn btn-raised btn-info']) !!}
                 {!! link_to(route('articles.edit', $article->id), 'Edit', ['class' => 'btn btn-raised btn-warning']) !!}
                 {!! Form::submit('Delete', array('class' => 'btn btn-raised btn-danger', "onclick" => "return confirm('are you sure?')")) !!}
+                {!! Form::close() !!}
                
                  
                

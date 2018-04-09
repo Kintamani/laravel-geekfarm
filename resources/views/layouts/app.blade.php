@@ -11,7 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    {{--  <link href="/css/app.css" rel="stylesheet">  --}}
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    
+    <!-- Bootstrap Styles -->
+    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('css/bootstrap-theme.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -84,8 +89,74 @@
 
         @yield('content')
     </div>
-
+    <!-- Jquery -->
+    <script src="{{ asset('js/jquery.min.js')}}" type="text/javascript"></script>
+    
+    <!-- Bootstrap Js -->
+    <script src="{{asset('js/bootstrap.js')}}"  type="text/javascript"></script>
+     
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="js/app.js'"  type="text/javascript"></script>
+    <! -- Ajax -->
+    
+    <!-- Search -->
+    <script>
+        $('#search').on('click', function(){
+        $.ajax({
+        url : '/articles',
+        type : 'GET',
+        dataType : 'json',
+        data : {
+        'keywords' : $('#keywords').val()
+        
+        },
+        success : function(data) {
+        //menampilkan fungsi ajax
+        $('#data-content').html(data['view']);
+        
+        },
+        error : function(xhr, status) {
+            console.log(xhr.error + " ERROR STATUS : " + status);
+            },
+            complete : function() {
+            alreadyloading = false;
+            }
+            });
+            });
+    </script>
+    
+    <-- pagination -->
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.pagination a', function(e) {
+                get_page($(this).attr('href').split('page=')[1]);
+                e.preventDefault();
+            });
+        });
+        
+        function get_page(page) {
+            $.ajax({
+                url : '/articles?page=' + page,
+                type : 'GET',
+                dataType : 'json',
+                data : {
+                'keywords' : $('#keywords').val(),
+                'direction' : $('#direction').val()
+            }
+            success : function(data) {
+                $('#data-content').html(data['view']);
+                $('#keywords').val(data['keywords']);
+                $('#direction').val(data['direction']);
+            },
+            error : function(xhr, status, error) {
+                console.log(xhr.error + "\n ERROR STATUS : " + status + "\n"+ error);
+            },
+            complete : function() {
+                alreadyloading = false;
+            }
+            });
+            }
+        </script>
+    
 </body>
 </html>

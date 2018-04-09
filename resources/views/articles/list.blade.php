@@ -11,8 +11,11 @@
           {!! str_limit($article->content, 250) !!} 
           <a href="{{route('articles.show', $article->id)}}">Read More</a>
         </p>
-    {{--  </div>  --}}
+  
   </div>  
 </div>
 
 @endforeach
+<div>
+  {!! $articles->links() !!}
+</div>

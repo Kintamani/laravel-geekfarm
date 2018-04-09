@@ -15,15 +15,28 @@ class ArticlesController extends Controller
     }
     
     public function index(Request $request){
+       
+        if($request->ajax()) {
+            $articles = Article::where('title', 'like', '%'.$request->keywords.'%')->orWhere('content', 'like','%'.$request->keywords.'%')->paginate(3);//versi 5.3
+            $view = (String) view('articles.list')->with('articles', $articles)->render();
+            return response()->json(['view' => $view, 'status' => 'success']);
+            
+            
+            
+            
         
-        if (empty($request->keyword)) {
-            $articles = Article::all();
+       } 
+       else{ 
+            if (empty($request->keyword)) {
+                $articles = Article::paginate(3);
+                return view('articles.index')->with('articles', $articles);
+            }
+            else{
+                // dd($request);
+            $articles = Article::where('title', 'like', '%'.$request->keyword.'%') ->orWhere('content', 'like', '%'.$request->keyword.'%')->paginate(3);
             return view('articles.index')->with('articles', $articles);
-        }
-        else{
-            // dd($request);
-        $articles = Article::where('title', 'like', '%'.$request->keyword.'%') ->orWhere('content', 'like', '%'.$request->keyword.'%')->get();
-        return view('articles.index')->with('articles', $articles);
+            
+            }
         }
     }
    
@@ -59,7 +72,7 @@ class ArticlesController extends Controller
     }
 
     public function destroy($id){
-        dd(id);
+        //dd(id);
         Article::destroy($id);
         Session::flash("notice", "Article success deleted");
         return redirect()->route("articles.index");
