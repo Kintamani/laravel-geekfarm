@@ -125,7 +125,7 @@
             });
     </script>
     
-    <-- pagination -->
+    <!-- pagination -->
     <script>
         $(document).ready(function() {
             $(document).on('click', '.pagination a', function(e) {
@@ -141,7 +141,7 @@
                 dataType : 'json',
                 data : {
                 'keywords' : $('#keywords').val(),
-                'direction' : $('#direction').val()
+                
             },
             success : function(data) {
                 $('#data-content').html(data['view']);

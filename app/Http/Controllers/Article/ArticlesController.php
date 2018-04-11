@@ -19,10 +19,7 @@ class ArticlesController extends Controller
         if($request->ajax()) {
             $articles = Article::where('title', 'like', '%'.$request->keywords.'%')->orWhere('content', 'like','%'.$request->keywords.'%')->paginate(3);//versi 5.3
             $view = (String) view('articles.list')->with('articles', $articles)->render();
-            return response()->json(['view' => $view, 'status' => 'success']);
-            
-            
-            
+            return response()->json(['view' => $view, 'status' => 'success']);        
             
         
        } 
