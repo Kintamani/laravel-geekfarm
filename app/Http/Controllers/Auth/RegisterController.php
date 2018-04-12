@@ -6,6 +6,8 @@ use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon;
+use DateTime;
 
 class RegisterController extends Controller
 {
@@ -47,13 +49,30 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        //CARA 1
+        Validator::extend('olderThan', function($attribute, $value, $parameters){
+            $minAge = ( ! empty($parameters)) ? (int) $parameters[0] : 13;
+            return (new DateTime)->diff(new DateTime($value))->y >= $minAge;
+
+            // or the same using Carbon:
+            // return Carbon\Carbon::now()->diff(new Carbon\Carbon($value))->y >= $minAge;
+        });
+
+        // CARA 2
+        //validation 17 th
+        // $dt = new Carbon\Carbon();
+        // $before = $dt->subYears(17)->format('Y-m-d');
+        
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            //'dob' => 'required|date|before:' .$before
+            'dob' => 'required|olderThan:17',
         ]);
-    }
 
+        
+    }
     /**
      * Create a new user instance after a valid registration.
      *

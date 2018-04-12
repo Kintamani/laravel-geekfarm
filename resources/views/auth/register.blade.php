@@ -59,6 +59,21 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+                        
+                        <div class="form-group {{ $errors->has('dob') ? ' has-error' : '' }}">
+                            <label for="dob" class="col-md-4 control-label">DOB</label>
+
+                            <div class="col-md-6">
+                                <input class="form-control" id="dob" name="dob" placeholder="DD/MM/YYYY" type="text" required>
+                            
+                            @if ($errors->has('dob'))
+                                <br>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('dob') }}</strong>
+                                    </span>
+                            @endif
+                            </div>
+                        </div>  
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
