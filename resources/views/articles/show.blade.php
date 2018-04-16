@@ -2,7 +2,9 @@
 @section("content")
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    
+
+    <div class="col-md-7 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>{!! $article->title !!}</h1>
@@ -11,6 +13,8 @@
                 {!! link_to(route('articles.edit', $article->id), 'Edit', ['class' => 'btn btn-raised btn-warning']) !!}
                 {!! Form::submit('Delete', array('class' => 'btn btn-raised btn-danger', "onclick" => "return confirm('are you sure?')")) !!}
                 {!! Form::close() !!}
+
+                
                
                  
                
@@ -40,6 +44,7 @@
                     
                   <div class="col-lg-9">
                     {!! Form::text('article_id', $value = $article->id, array('class' => 'form-control', 'readonly')) !!}
+                    
                   </div>
                 
                   <div class="clear"></div>
@@ -92,6 +97,8 @@
             </div>
         </div>
     </div>
+    
+
     
 @stop
 

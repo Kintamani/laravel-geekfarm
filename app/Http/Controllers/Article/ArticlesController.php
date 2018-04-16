@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Article;
 use Session;
+use Validator;
+
 
 class ArticlesController extends Controller
 {
@@ -42,9 +44,33 @@ class ArticlesController extends Controller
     }
 
     public function store(Request $request){
-        Article::create($request->all());
-        Session::flash("notice", "Article success created");
-        return redirect()->route("articles.index");        
+        // Validation //
+        $validation = Validator::make($request->all(), [
+        'image' => 'required|min:1|max:250'
+        ]);
+        // dd($validation);
+        // Check if it fails //
+        if( $validation->fails() ){
+            return redirect()->back()->withInput()->with('errors', $validation->errors() );
+        }
+        $image = new Article;
+        // upload the image //
+        $file = $request->file('image');
+        $destination_path = 'uploads/';
+        $filename = str_random(6).'_'.$file->getClientOriginalName();
+        $file->move($destination_path, $filename);
+        
+        // save image data into database //
+        $image->title= $request->input('title');
+        $image->content= $request->input('content');
+        $image->image = $destination_path . $filename;
+        $image->save();
+        
+        return redirect('/admin')->with('message','You just uploaded an image!');
+        
+            // Article::create($request->all());
+            // Session::flash("notice", "Article success created");
+            // return redirect()->route("articles.index");        
     }
 
     public function show($id){
@@ -52,9 +78,10 @@ class ArticlesController extends Controller
         //$comments = Article::find($id)->comments;
         //return view('articles.show')->with('articles', $article);
         
+
         $article = Article::find($id);
         $comments = Article::find($id)->comments->sortBy('Comment.created_at');
-        return view('articles.show')->with('article', $article)->with('comments', $comments);
+        return view('articles.show')->with('article', $article)->with('comments', $comments)->with('image', $image);
     }
 
     public function edit($id){

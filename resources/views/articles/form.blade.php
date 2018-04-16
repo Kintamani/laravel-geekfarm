@@ -21,6 +21,19 @@
   </div>
 </div>
 <div class="form-group">
+    {!! Form::label('image', 'Image', array('class' => 'col-lg-3 control-label')) !!}
+    <div class="col-lg-9">
+      {!! Form::file('image', null, array('class' => 'form-control', 'rows' => 10)) !!}
+      <div class="text-danger">
+          
+        {!! $errors->first('image') !!}
+      </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="form-group">
   <div class="col-lg-3">
   </div>
   <div class="col-lg-9">

@@ -11,9 +11,12 @@
               </div>
 
               <div class="panel-body">
-                {!! Form::open(['route' => 'articles.store', 'class' => 'formhorizontal','role' => 'form']) !!}
+                {!! Form::open(['route' => 'articles.store', 'class' => 'formhorizontal','role' => 'form','files' => 'true']) !!}
+                
                 @include('articles.form')
+                
                 {!! Form::close() !!}
+                
               </div>
           </div>
       </div>

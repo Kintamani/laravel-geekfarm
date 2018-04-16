@@ -14,6 +14,9 @@
                  
                 {!! link_to(route('articles.create'), "Create", ['class' => 'btn btn-raised btn-info']) !!}
                 {!! link_to(route('articles.index'), "Article", ['class' => 'btn btn-raised btn-info']) !!}
+                {!! link_to(route('image.create'), "Image Create", ['class' => 'btn btn-raised btn-info']) !!}
+                <button type="button" class="btn btn-info" onclick="location.href = '{{ url('mymail') }}';">Info</button>
+                
                 </div>
             </div>
         </div>
