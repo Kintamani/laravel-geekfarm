@@ -78,7 +78,7 @@ class ArticlesController extends Controller
         //$comments = Article::find($id)->comments;
         //return view('articles.show')->with('articles', $article);
         
-
+        $image = Article::findorfail($id);
         $article = Article::find($id);
         $comments = Article::find($id)->comments->sortBy('Comment.created_at');
         return view('articles.show')->with('article', $article)->with('comments', $comments)->with('image', $image);
